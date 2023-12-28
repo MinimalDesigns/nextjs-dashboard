@@ -5,6 +5,7 @@ import {
   InboxIcon,
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
+import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -14,18 +15,24 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
+
+  // By fetching data in the component we can use Suspense from React
+  // and render each component as these are ready.
+  // In this case we had to create a Wrapper component to be able to
+  // render these component's section as soon as all components are ready.
+  const { 
+      totalPaidInvoices, 
+      totalPendingInvoices, 
+      numberOfInvoices, 
+      numberOfCustomers 
+  } = await fetchCardData();
+
   return (
     <>
-      {/* NOTE: comment in this code when you get to this point in the course */}
-
-      {/* <Card title="Collected" value={totalPaidInvoices} type="collected" />
+      <Card title="Collected" value={totalPaidInvoices} type="collected" />
       <Card title="Pending" value={totalPendingInvoices} type="pending" />
       <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-      <Card
-        title="Total Customers"
-        value={numberOfCustomers}
-        type="customers"
-      /> */}
+      <Card title="Total Customers" value={numberOfCustomers} type="customers" />
     </>
   );
 }
