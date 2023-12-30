@@ -6,6 +6,11 @@ import { Suspense } from 'react';
 // In order to use Suspense you'll have to create some Skeleton components
 //to render while the components are performing any prerender processes
 import { RevenueChartSkeleton, LatestInvoicesSkeleton, CardsSkeleton } from '@/app/ui/skeletons';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Dashboard',
+  };
 
 export default async function Page() {
     return (
